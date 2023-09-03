@@ -1,5 +1,6 @@
 const mongoose=require('mongoose');
-const mongoURL=process.env.MONGODB_URL;
+const dotenv=require('dotenv').config();
+const mongoURL=process.env.mongoURL;
 
 mongoose.connect(mongoURL,{
     useUnifiedTopology:true
