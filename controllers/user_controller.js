@@ -1,9 +1,25 @@
 const User = require('../models/User');
+const bcrypt = require('bcrypt');
 
-module.exports.signinUser = (req, res) => {
-    const {email,password}=req.body;
-    
-    return res.status(200).json(req.body);
+module.exports.signinUser = async (req, res) => {
+    try{
+        const {email,password}=req.body;
+        const user=await User.findOne({email:email});
+        const isMatching=await bcrypt.compare(password,user.password);
+
+        if(isMatching){
+            req.flash('success','Login Successful');
+            return res.render('home',{
+                user:email.split('@')[0]
+            })
+        }else{
+            req.flash('error', 'Invalid password');
+            return res.redirect('back');
+        }
+    }catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
 }
 
 module.exports.signupUser = async (req, res) => {
@@ -27,6 +43,7 @@ module.exports.signupUser = async (req, res) => {
 
         }
         await User.create(req.body);
+        req.flash('success','Login Successful');
         return res.render('home',{
             user:email.split('@')[0],
         })

@@ -19,12 +19,17 @@ const userSchema=new mongoose.Schema({
     }
 });
 
-userSchema.pre('save',async function(next){
-    if(!this.isModified('password')){
-        this.password=await bcrypt.hash(this.password,10);
+userSchema.pre('save', async function (next) {
+    if (this.isModified('password') || this.isNew) { // Only hash if modified or new
+        try {
+            const hashedPassword = await bcrypt.hash(this.password, 10);
+            this.password = hashedPassword;
+        } catch (error) {
+            return next(error);
+        }
     }
     next();
-})
+});
 
 const User=mongoose.model('User',userSchema)
 module.exports=User;
