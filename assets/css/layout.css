@@ -1,0 +1,23 @@
+:root{
+    --main-bg-color: #ada6a6;
+    --main-style: Verdana, Geneva, sans-serif;
+}
+
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+html,body{
+    height:100%;
+}
+body{
+    line-height: 1.2;
+    overflow: hidden;
+    font-family: var(--main-style);
+    background-color: var(--main-bg-color);
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
