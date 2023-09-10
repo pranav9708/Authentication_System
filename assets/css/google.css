@@ -1,0 +1,15 @@
+.google-icon{
+    font-size: large;
+}
+.google-text{
+    font-size: medium;
+    text-decoration: none;
+    color:black;
+}
+.google-container{
+    border:1px solid black;
+    padding:var(--padding);
+    margin:var(--margin);
+    text-align: center;
+    border-radius: 5px;
+}

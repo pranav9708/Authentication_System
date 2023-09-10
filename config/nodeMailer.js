@@ -11,10 +11,11 @@ const transporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-        user: process.env.nodemailerEmail,
-        pass: process.env.nodemailerPassword,
+        user: 'abhijithv230@gmail.com',
+        pass: 'fwykzussnhgnwlcs',
     },
 });
+
 
 let renderTemplate = (data, relativePath) => {
     let mailHTML;

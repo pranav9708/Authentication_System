@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const crypto=require('crypto');
+const bcrypt=require('bcrypt');
 const forgotMailer=require('../mailers/forgotPassword_mailer');
 module.exports.signupUser = async (req, res) => {
     try {
@@ -101,4 +102,51 @@ module.exports.forgotPassword=async(req,res)=>{
 
 module.exports.renderForgotPassword=async(req,res)=>{
     return res.render('forgotPassword');
+}
+
+
+module.exports.resetPassword=async(req,res)=>{
+    try{
+        const token=req.params.token;
+        const user=await User.findOne({
+            resetPasswordToken:token,
+            resetPasswordExpires: {$gt:Date.now()},
+        });
+        if(!user){
+            return res.redirect('/forgot-password/expired');
+        }
+        const newPassword= req.body.password;
+        bcrypt.hash(newPassword,10,async(err,hashedPassword)=>{
+            if(err){
+                console.error('Error hashing password',err);
+            }else{
+                await User.findByIdAndUpdate(user._id,{
+                    password: hashedPassword,
+                    resetPasswordToken: '',
+                    resetPasswordExpires: Date.now()
+                })
+            }
+        })
+        return res.redirect('/signin');
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({error:"Internal Server Error"})
+    }
+}
+
+module.exports.renderResetPassword=async(req,res)=>{
+    try{
+        const token=req.params.token;
+        const user=await User.findOne({
+            resetPasswordToken:token,
+            resetPasswordExpires: {$gt:Date.now()},
+        });
+        if(!user){
+            return res.redirect('/forgot-password/expired');
+        }
+        return res.render('resetPassword',{token})
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({error:"Internal Server Error"})
+    }
 }

@@ -6,7 +6,7 @@
     --padding:10px;
 }
 
-.signin-section{
+.section{
     width:400px;
     font-size: 1.2rem;
     background-color: var(--second-bg-color);
@@ -15,21 +15,21 @@
     padding:10px;
 }
 
-.signin-heading{
+.heading{
     margin:var(--margin) 0;
     font-family: var(--heading-style);
     text-align: center;
     color:var(--main-color);
 }
 
-.signin-form label{
+.form label{
     margin-top:var(--margin);
     display:block;
     color:darkslategray;
     padding-left: var(--padding);
 }
 
-.signin-form input{
+.form input{
     width:100%;
     padding-left: var(--padding);
 }

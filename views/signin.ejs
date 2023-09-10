@@ -1,8 +1,10 @@
 <link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/google.css">
 
-<section class="signin-section">
-    <h1 class="signin-heading">Sign In</h1>
-    <form class="signin-form" action="/create-session" method="post">
+
+<section class="section">
+    <h1 class="heading">Sign In</h1>
+    <form class="form" action="/create-session" method="post">
 
         <div class="input-container">
             <label for="email">Email</label>
@@ -18,11 +20,13 @@
             <button class="button-box" type="submit">Submit</button>
         </div>
 
-        <div class="container"><a class="link" href="/renderForgotPassword">Forgot password?</a></div>
     </form> 
 
-    <p>
-        <a href="/auth/google">Sign In with Google</a>
+    <p class="google-container">
+        <i class="fa-brands fa-google google-icon"></i>
+        <a href="/auth/google" class="google-text"> Continue with Google</a>
     </p>
+    <div class="container"><a class="link" href="/renderForgotPassword">Forgot password?</a></div>
+
 
 </section>
