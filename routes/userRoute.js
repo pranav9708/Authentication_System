@@ -5,6 +5,9 @@ const passport=require('passport');
 
 router.get('/signin',userController.renderSignIn);
 
+router.get('/',userController.renderSignIn);
+
+
 router.get('/signup',userController.renderSignUP);
 
 router.get('/home',passport.checkAuthentication,userController.home);
