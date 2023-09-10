@@ -15,4 +15,10 @@ router.post('/signup',userController.signupUser);
 
 router.get('/logout-user',userController.deleteSession);
 
+//url which sents request to google
+router.get('/auth/google',passport.authenticate('google',{scope:['profile','email']}));
+//url in which we gets back data from google
+router.get('/auth/google/callback',passport.authenticate('google',{ failureRedirect: '/signin', failureFlash: true }),userController.createSession)
+
+
 module.exports=router;

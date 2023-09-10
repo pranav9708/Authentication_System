@@ -11,6 +11,7 @@ const bodyParser=require('body-parser');
 const MongoStore=require('connect-mongo');
 const passport=require('passport');
 const passportLocal=require('./config/passport-local-strategy')
+const passportGoogle=require('./config/passport-google-oauth2-strategy')
 
 app.use(bodyParser.urlencoded({extended:false}));
 
