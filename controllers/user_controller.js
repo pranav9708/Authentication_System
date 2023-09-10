@@ -49,7 +49,7 @@ module.exports.renderSignUP = (req, res) => {
     if(req.isAuthenticated()){
         return res.redirect('/home')
     }
-    return res.render('signUp');
+    return res.render('signup');
 }
 
 
