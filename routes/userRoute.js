@@ -5,7 +5,9 @@ const passport=require('passport');
 
 router.get('/signin',userController.renderSignIn);
 
-router.get('/',userController.renderSignIn);
+router.get('/',(req,res)=>{
+    return res.redirect('/signin');
+});
 
 
 router.get('/signup',userController.renderSignUP);
