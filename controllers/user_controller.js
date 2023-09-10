@@ -1,5 +1,6 @@
 const User = require('../models/User');
-
+const crypto=require('crypto');
+const forgotMailer=require('../mailers/forgotPassword_mailer');
 module.exports.signupUser = async (req, res) => {
     try {
         const { email, password, confirmPassword } = req.body;
@@ -68,4 +69,36 @@ module.exports.deleteSession=async(req,res)=>{
 
 module.exports.home=async(req,res)=>{
     return res.render('home')
+}
+
+module.exports.forgotPassword=async(req,res)=>{
+    try{
+        const {email}=req.body;
+        const user=await User.findOne({email:email});
+        if(!user){
+            req.flash('error','Entered email id is not registered');
+            return res.redirect('/forgot-password');
+        }
+
+        const resetToken =crypto.randomBytes(20).toString('hex');
+        const resetTokenExpires=Date.now()+3600000; //1 hour (60min * 60 seconds*1000milliseconds)
+
+
+        const updatedUser=await User.findByIdAndUpdate(user._id,{
+            resetPasswordToken: resetToken,
+            resetPasswordExpires: resetTokenExpires,
+        })
+        
+        const resetLink=`http://localhost:8004/reset-password/${resetToken}`;
+        forgotMailer.forgotPassword(updatedUser,resetLink);
+        req.flash('success','mail sent to reset-password');
+        return res.redirect('/signin');
+
+    }catch(err){
+        res.status(500).json({error:"Internal server error"})
+    }
+}
+
+module.exports.renderForgotPassword=async(req,res)=>{
+    return res.render('forgotPassword');
 }

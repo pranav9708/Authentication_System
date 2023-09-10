@@ -20,5 +20,7 @@ router.get('/auth/google',passport.authenticate('google',{scope:['profile','emai
 //url in which we gets back data from google
 router.get('/auth/google/callback',passport.authenticate('google',{ failureRedirect: '/signin', failureFlash: true }),userController.createSession)
 
+router.get('/renderForgotPassword',userController.renderForgotPassword);
+router.post('/forgot-password',userController.forgotPassword);
 
 module.exports=router;

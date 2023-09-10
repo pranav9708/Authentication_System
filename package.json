@@ -22,6 +22,7 @@
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.17.3",
     "mongoose": "^7.4.3",
+    "nodemailer": "^6.9.5",
     "noty": "^3.2.0-beta-deprecated",
     "passport": "^0.6.0",
     "passport-google-oauth": "^2.0.0",
