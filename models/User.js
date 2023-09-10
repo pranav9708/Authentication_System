@@ -11,6 +11,9 @@ const userSchema=new mongoose.Schema({
         type:String,
         required:true,
     },
+    googleId:{
+        type:String,
+    },
     resetPasswordToken:{
         type:String,
     },
@@ -32,4 +35,5 @@ userSchema.pre('save', async function (next) {
 });
 
 const User=mongoose.model('User',userSchema)
+
 module.exports=User;

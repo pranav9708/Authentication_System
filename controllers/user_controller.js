@@ -1,31 +1,8 @@
 const User = require('../models/User');
-const bcrypt = require('bcrypt');
-
-module.exports.signinUser = async (req, res) => {
-    try{
-        const {email,password}=req.body;
-        const user=await User.findOne({email:email});
-        const isMatching=await bcrypt.compare(password,user.password);
-
-        if(isMatching){
-            req.flash('success','Login Successful');
-            return res.render('home',{
-                user:email.split('@')[0]
-            })
-        }else{
-            req.flash('error', 'Invalid password');
-            return res.redirect('back');
-        }
-    }catch (err) {
-        console.error(err);
-        return res.status(500).json({ error: 'Internal Server Error' });
-    }
-}
 
 module.exports.signupUser = async (req, res) => {
     try {
         const { email, password, confirmPassword } = req.body;
-        console.log(email, password, confirmPassword);
         if (password.length < 8) {
             req.flash('error', 'password must be atleast 8 characters long');
             return res.redirect('/signup');
@@ -42,6 +19,11 @@ module.exports.signupUser = async (req, res) => {
             return res.redirect('/signup');
 
         }
+        const user=await User.findOne({email:req.body.email});
+        if(user){
+            req.flash('error','email is already registered please sign In ')
+            return res.redirect('/signin');
+        }
         await User.create(req.body);
         req.flash('success','Login Successful');
         return res.render('home',{
@@ -55,9 +37,35 @@ module.exports.signupUser = async (req, res) => {
 }
 
 module.exports.renderSignIn = (req, res) => {
+    if(req.isAuthenticated()){
+        return res.redirect('/home')
+    }
     return res.render('signin');
 }
 
 module.exports.renderSignUP = (req, res) => {
+    if(req.isAuthenticated()){
+        return res.redirect('/home')
+    }
     return res.render('signUp');
+}
+
+
+module.exports.createSession=async(req,res)=>{
+    req.flash('success','LogIn successful')
+    return res.redirect('/home');
+}
+
+module.exports.deleteSession=async(req,res)=>{
+    req.logout(function(err){
+        if(err){
+            return next(err);
+        }
+        req.flash('success','Logout Successful')
+        return res.redirect('/signin');
+    });
+}
+
+module.exports.home=async(req,res)=>{
+    return res.render('home')
 }
