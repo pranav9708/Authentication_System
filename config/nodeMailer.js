@@ -1,10 +1,9 @@
-
+//config file for setting up mailer
 const nodemailer = require('nodemailer');
-const dotenv = require('dotenv').config();
 const ejs = require('ejs');
 const path = require('path');
 
-// Create a transporter with Gmail SMTP
+//transporter contains the email that will sent the mails.
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
@@ -16,7 +15,7 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-
+//setting up the render file path for mail template file
 let renderTemplate = (data, relativePath) => {
     let mailHTML;
     ejs.renderFile(

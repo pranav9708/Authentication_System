@@ -1,4 +1,9 @@
 <section class="greeting-section">
-    <h1>Hi <%=user.email%>. Welcome!</h1>
-    <a href="/logout-user">Sign Out</a>
+    <%if(locals.user){%>
+        <h1>Hi <%=locals.user.email%>. Welcome!</h1>
+        <a href="/user/logout-user">Sign Out</a>
+    <%}else{%>
+        <h1>Hi google <%=user.email%>. Welcome!</h1>
+        <a href="/user/logout-user">Sign Out</a>
+    <%}%>
 </section>

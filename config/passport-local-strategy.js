@@ -1,3 +1,4 @@
+//config file for passport local
 const passport = require('passport');
 const LocalStrategy= require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
@@ -11,6 +12,7 @@ passport.use(new LocalStrategy({
 }, async function(req,email,password,done){
 
     try{
+        //checking if user is present in db and password is matching or not.
         const user = await User.findOne({ email: email});
         if(!user){
             req.flash('error','Invalid email or password');
@@ -18,7 +20,7 @@ passport.use(new LocalStrategy({
         }
         const isMatching=await bcrypt.compare(password,user.password);
         if(!isMatching){
-            console.log('error in finding user ----->Passport local');
+            console.log('password not matching ----->Passport local');
             req.flash('error','Invalid email or password');
             return done(null,false);
         }
@@ -50,7 +52,7 @@ passport.checkAuthentication=function(req,res,next){
     if(req.isAuthenticated()){
         return next();
     }
-    return res.redirect('/signin');
+    return res.redirect('/user/signin');
 }
 
 passport.setAuthenticatedUser=function(req,res,next){

@@ -4,7 +4,7 @@
 
 <section class="section">
     <h1 class="heading">Sign In</h1>
-    <form class="form" action="/create-session" method="post">
+    <form class="form" action="/user/create-session" method="post">
 
         <div class="input-container">
             <label for="email">Email</label>
@@ -16,7 +16,7 @@
             <input type="password" id="password" name="password" required>
         </div>
         <div class="container justify-between">
-            <a class="button-box" href="/signup">Sign Up</a>
+            <a class="button-box" href="/user/signup">Sign Up</a>
             <button class="button-box" type="submit">Submit</button>
         </div>
 
@@ -24,9 +24,9 @@
 
     <p class="google-container">
         <i class="fa-brands fa-google google-icon"></i>
-        <a href="/auth/google" class="google-text"> Continue with Google</a>
+        <a href="/user/auth/google" class="google-text"> Continue with Google</a>
     </p>
-    <div class="container"><a class="link" href="/renderForgotPassword">Forgot password?</a></div>
+    <div class="container"><a class="link" href="/user/renderForgotPassword">Forgot password?</a></div>
 
 
 </section>

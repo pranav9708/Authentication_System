@@ -13,6 +13,7 @@
     border-radius: 5px;
     box-shadow:5px 5px 10px grey;
     padding:10px;
+    margin:var(--margin);
 }
 
 .heading{

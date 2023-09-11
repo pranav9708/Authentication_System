@@ -1,8 +1,9 @@
+//forgot mail setup file.
 const nodeMailer=require('../config/nodeMailer');
 const dotenv=require('dotenv').config();
 
 exports.forgotPassword=(user,resetLink)=>{
-    console.log('inside forgot password mailer');
+    //getting html content from ejs file
     let htmlString=nodeMailer.renderTemplate({user:user,resetLink:resetLink},'/forgotmail.ejs');
 
     nodeMailer.transporter.sendMail({

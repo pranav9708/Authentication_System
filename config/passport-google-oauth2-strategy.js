@@ -1,3 +1,4 @@
+//config file to setup passport google strategy
 const passport=require('passport');
 const googleStrategy=require('passport-google-oauth').OAuth2Strategy;
 const crypto=require('crypto');
@@ -11,6 +12,7 @@ passport.use(new googleStrategy({
 },
 async function(accessToken,refreshToken,profile,done){
     try{
+        //checking if user is already present and creating a new user if not present
         const user=await User.findOne({email:profile.emails[0].value});
         if(user){
             return done(null,user);

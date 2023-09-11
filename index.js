@@ -17,6 +17,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 
 const port=process.env.PORT || 8001;
 
+//setting up session
 app.use(session({
     name:'authSystem',
     secret: process.env.sessionSecret,
@@ -31,13 +32,17 @@ app.use(session({
     })
 }))
 
+//setting up flash messages
 app.use(flash());
+
+//initializing passport
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
 app.use(flashMiddleware.setFlash);
 
+//setting view part 
 app.use(expressLayout);
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
@@ -46,6 +51,7 @@ app.set('view engine', 'ejs');
 app.set('views',path.join(__dirname, 'views'));
 app.use(express.static('./assets'));
 
+//sending routing request to routes
 app.use('/',require('./routes'));
 
 app.listen(port,()=>{
