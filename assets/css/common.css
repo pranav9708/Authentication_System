@@ -7,7 +7,7 @@
 }
 
 .section{
-    width:400px;
+    width:410px;
     font-size: 1.2rem;
     background-color: var(--second-bg-color);
     border-radius: 5px;
@@ -98,3 +98,9 @@
     font-size: 0.9rem;
     box-shadow: 0px 0px 10px rgb(95, 94, 94);
 }
+
+@media only screen and (max-width: 380px) {
+    .section{
+        width:325px;
+    }
+  }
