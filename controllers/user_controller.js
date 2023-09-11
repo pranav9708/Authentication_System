@@ -47,9 +47,11 @@ module.exports.signupUser = async (req, res) => {
             req.flash('error', 'email is already registered please sign In ')
             return res.redirect('/user/signin');
         }
-        await User.create(req.body);
+        const newUser=await User.create(req.body);
         req.flash('success', 'Login Successful');
-        return res.render('home')
+        return res.render('home',{
+            user: newUser
+        })
 
     } catch (err) {
         return res.status(403).json(err);
