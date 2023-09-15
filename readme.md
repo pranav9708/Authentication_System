@@ -93,6 +93,20 @@ The project has a scalable folder structure with separate folders for models, co
 - **mailer**: Contains functions for sending emails.
 - **assets**: Contains CSS and other static assets.
 
+# Authentication System
+
+## Folder Structure
+
+The project has a scalable folder structure with separate folders for models, controllers, and routes. The main folders are as follows:
+
+- **models**: Contains database schema definitions.
+- **controllers**: Handles the application's logic.
+- **routes**: Defines the application's routes.
+- **views**: Contains EJS templates for rendering pages.
+- **config**: Contains application configuration files.
+- **mailer**: Contains functions for sending emails.
+- **assets**: Contains CSS and other static assets.
+
 ## Usage
 
 ### Sign Up
@@ -114,10 +128,12 @@ The project has a scalable folder structure with separate folders for models, co
 - To log out, simply click the "Sign Out" button on the home page.
 - You will be logged out and redirected to the login page.
 
-### Reset Password
+### Password Reset
 
-- While logged in, click the "Reset Password" button on the home page.
-- Follow the instructions to reset your password securely.
+- If you forget your password, click the "Forgot Password" link on the login page.
+- Enter your registered email address.
+- An email with a password reset link will be sent to your email address.
+- Click the password reset link, and you will be directed to a page to reset your password securely.
 
 ### Google Authentication
 
@@ -131,7 +147,7 @@ User passwords are securely stored in the database using encryption. Ensure that
 
 ## Bonus Feature
 
-The project includes a bonus feature for password recovery. You can request a password reset by clicking the "Forgot Password" link on the login page. You will receive a password reset link via email, which can be used to reset your password.
+The project includes a bonus feature for password recovery, where a password reset link is sent to your email.
 
 ## Display Notifications
 
