@@ -100,7 +100,7 @@ module.exports.forgotPassword = async (req, res) => {
             resetPasswordExpires: resetTokenExpires,
         })
 
-        const resetLink = `http://localhost:8004/user/reset-password/${resetToken}`;
+        const resetLink = `https://calm-rose-lemur-suit.cyclic.app/user/reset-password/${resetToken}`;
         forgotMailer.forgotPassword(updatedUser, resetLink);
         req.flash('success', 'mail sent to reset-password');
         return res.redirect('/user/forgot-password/sent');
