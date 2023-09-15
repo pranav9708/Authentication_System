@@ -88,7 +88,7 @@ module.exports.forgotPassword = async (req, res) => {
         const user = await User.findOne({ email: email });
         if (!user) {
             req.flash('error', 'Entered email id is not registered');
-            return res.redirect('/user/forgot-password');
+            return res.redirect('/user/renderForgotPassword');
         }
 
         const resetToken = crypto.randomBytes(20).toString('hex');
@@ -100,7 +100,7 @@ module.exports.forgotPassword = async (req, res) => {
             resetPasswordExpires: resetTokenExpires,
         })
 
-        const resetLink = `https://calm-rose-lemur-suit.cyclic.app/user/reset-password/${resetToken}`;
+        const resetLink = `http://localhost:8004/user/reset-password/${resetToken}`;
         forgotMailer.forgotPassword(updatedUser, resetLink);
         req.flash('success', 'mail sent to reset-password');
         return res.redirect('/user/forgot-password/sent');
